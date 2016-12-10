@@ -2,3 +2,4 @@
 1.add to git version control
 2.test merge
 3.git push orign master
+4.try pull
