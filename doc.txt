@@ -1,5 +1,8 @@
-20161210
-1.add to git version control
-2.test merge
-3.git push orign master
-4.try pull
+1.git add -A
+2.git commit -m "ccc"
+3.git push -u orign master
+4.git log
+5.git status
+6.git reset --hard  SHA4
+7.git clone ...
+8.git pull
