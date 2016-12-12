@@ -30,11 +30,21 @@ using namespace std;
 using namespace cv;
 #define PI 3.14
 
+#define IMAGE_WIDTH 256
+#define IMAGE_HEIGHT 256
+#define IMAGE_CHANNELS 3
+
+
+
+
 class ImageDLL{
 public:
 	ImageDLL();
 	~ImageDLL();
-	 void Gray(IplImage *ColorImage, IplImage  *GrayImage);//, int flag
+	static IplImage* TheImage;
+
+	void ResizeImage(IplImage* img);
+	 void Gray(IplImage *ColorImage,int flag);//
 
 	 void Threshold(Mat src, Mat dst, double thresh, double maxval, int type);
 

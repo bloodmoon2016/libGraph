@@ -20,11 +20,11 @@ void init(){
 	instance = new ImageDLL;
 }
 
-void Gray(string& src_path, string& dest_path)//, int flag
+void Gray(string& src_path, string& dest_path, int flag)//
 {
 	auto newImg = getImg(src_path);
 	IplImage* GrayImage = new IplImage;
-	//instance->Gray(newImg, GrayImage);//, flag
+	instance->Gray(newImg, flag);//
 	saveImg(dest_path, newImg);
 	delete GrayImage;
 	return;
