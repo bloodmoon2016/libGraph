@@ -30,11 +30,15 @@ using namespace std;
 using namespace cv;
 #define PI 3.14
 
+
 class ImageDLL{
 public:
 	ImageDLL();
 	~ImageDLL();
-	 void Gray(IplImage *ColorImage, IplImage  *GrayImage);//, int flag
+	
+	IplImage* TheImage = cvCreateImage({256,256}, IPL_DEPTH_8U, 3);
+	void ResizeImage(IplImage* img);
+	void Gray(IplImage *ColorImage, int flag);//IplImage* GrayImage,
 
 	 void Threshold(Mat src, Mat dst, double thresh, double maxval, int type);
 

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 1.git add -A
 2.git commit -m "ccc"
 3.git push -u orign master
@@ -6,3 +7,11 @@
 6.git reset --hard  SHA4
 7.git clone ...
 8.git pull
+=======
+20161210
+1.add to git version control
+2.test merge
+3.git push orign master
+4.try pull
+5.test commit
+>>>>>>> 23682bc217cab54db8472999f0130f750c64fc88

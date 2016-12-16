@@ -7,9 +7,34 @@ using namespace std;
 
 ImageDLL* instance;
 
+
 static IplImage* getImg(string &path){	
-	IplImage* newImg = cvLoadImage(path.c_str());
-	return newImg;
+	IplImage* newImg = cvLoadImage(path.c_str(), -1);
+	IplImage* TheImage = cvCreateImage({ 256, 256 }, IPL_DEPTH_8U, 3);
+	// 读取图片的宽和高
+	int w = newImg->width;
+	int h = newImg->height;
+
+	// 找出宽和高中的较大值者
+	int max = (w > h) ? w : h;
+
+	// 计算将图片缩放到TheImage区域所需的比例因子
+	float scale = (float)((float)max / 256.0f);
+
+	// 缩放后图片的宽和高
+	int nw = (int)(w / scale);
+	int nh = (int)(h / scale);
+
+	// 为了将缩放后的图片存入 TheImage 的正中部位，需计算图片在 TheImage 左上角的期望坐标值
+	int tlx = (nw > nh) ? 0 : (int)(256 - nw) / 2;
+	int tly = (nw > nh) ? (int)(256 - nh) / 2 : 0;
+
+	// 设置 TheImage 的 ROI 区域，用来存入图片 newImg
+	cvSetImageROI(TheImage, cvRect(tlx, tly, nw, nh));
+
+	// 对图片 newImg 进行缩放，并存入到 TheImage 中
+	cvResize(newImg, TheImage);
+	return TheImage;
 }
 
 static void saveImg(string& path,IplImage* to_be_saved){
@@ -20,13 +45,14 @@ void init(){
 	instance = new ImageDLL;
 }
 
-void Gray(string& src_path, string& dest_path)//, int flag
+
+void Gray(string& src_path, string& dest_path, int flag)
 {
-	auto newImg = getImg(src_path);
-	IplImage* GrayImage = new IplImage;
-	//instance->Gray(newImg, GrayImage);//, flag
-	saveImg(dest_path, newImg);
-	delete GrayImage;
+	auto TheImage = getImg(src_path);
+	//IplImage* GrayImage = new IplImage;
+	instance->Gray(TheImage, flag);//GrayImage,
+	saveImg(dest_path, TheImage);
+	//delete GrayImage;
 	return;
 }
 
