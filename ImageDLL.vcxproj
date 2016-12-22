@@ -46,9 +46,9 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\..\Visual Studio 2013\Projects\libGraph\lib</OutDir>
-    <IncludePath>D:\opencv\build\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\opencv\build\x86\vc12\lib;$(LibraryPath)</LibraryPath>
+    <OutDir>.\libGraph\lib</OutDir>
+    <IncludePath>C:\Users\LiuYang\Documents\Github\libGraph\libGraph\include;D:\opencv\build\include;D:\opencv\build\include\opencv2;D:\opencv\build\include\opencv;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\opencv\build\x64\vc12\bin;D:\opencv\build\x86\vc12\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -86,10 +86,10 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Visual Studio 2013\Projects\libGraph\include\libGraph.h" />
     <ClInclude Include="datastruct.h" />
     <ClInclude Include="ImageDLL.h" />
     <ClInclude Include="impl.h" />
+    <ClInclude Include="libGraph\include\libGraph.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>

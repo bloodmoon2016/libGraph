@@ -33,7 +33,7 @@
     <ClInclude Include="impl.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Visual Studio 2013\Projects\libGraph\include\libGraph.h">
+    <ClInclude Include="libGraph\include\libGraph.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
