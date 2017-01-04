@@ -1,6 +1,7 @@
 #include "stdafx.h"
-#include "libGraph.h"
 #include "impl.h"
+#include "libGraph.h"
+
 
 #include <string>
 using namespace std;
@@ -10,75 +11,81 @@ ImageDLL* instance;
 
 static IplImage* getImg(string &path){	
 	IplImage* newImg = cvLoadImage(path.c_str(), -1);
-	IplImage* TheImage = cvCreateImage({ 256, 256 }, IPL_DEPTH_8U, 3);
-	// 读取图片的宽和高
-	int w = newImg->width;
-	int h = newImg->height;
+	return newImg;
+}
 
-	// 找出宽和高中的较大值者
-	int max = (w > h) ? w : h;
-
-	// 计算将图片缩放到TheImage区域所需的比例因子
-	float scale = (float)((float)max / 256.0f);
-
-	// 缩放后图片的宽和高
-	int nw = (int)(w / scale);
-	int nh = (int)(h / scale);
-
-	// 为了将缩放后的图片存入 TheImage 的正中部位，需计算图片在 TheImage 左上角的期望坐标值
-	int tlx = (nw > nh) ? 0 : (int)(256 - nw) / 2;
-	int tly = (nw > nh) ? (int)(256 - nh) / 2 : 0;
-
-	// 设置 TheImage 的 ROI 区域，用来存入图片 newImg
-	cvSetImageROI(TheImage, cvRect(tlx, tly, nw, nh));
-
-	// 对图片 newImg 进行缩放，并存入到 TheImage 中
-	cvResize(newImg, TheImage);
-	return TheImage;
+static Mat getMat(string &path){
+	Mat newMat = imread(path.c_str(), -1);
+	return newMat;
 }
 
 static void saveImg(string& path,IplImage* to_be_saved){
 	cvSaveImage(path.c_str(), to_be_saved);
 }
 
+static void saveMat(string& path, Mat to_be_saved){
+	imwrite(path.c_str(), to_be_saved);
+}
+
 void init(){
 	instance = new ImageDLL;
 }
 
-
 void Gray(string& src_path, string& dest_path, int flag)
 {
-	auto TheImage = getImg(src_path);
-	//IplImage* GrayImage = new IplImage;
-	instance->Gray(TheImage, flag);//GrayImage,
-	saveImg(dest_path, TheImage);
-	//delete GrayImage;
+	auto newImg = getImg(src_path);
+	IplImage* dst = new IplImage;
+	dst=instance->Gray(newImg, flag);
+	saveImg(dest_path, dst);
 	return;
 }
 
-/*void Threshold(Mat src, Mat dst, double thresh, double maxval, int type)
+void Threshold(string& src_path, string& dest_path, double thresh, double maxval, int type)
 {
-	return instance->Threshold(src, dst, thresh,  maxval, type);
+	auto newMat = getMat(src_path);
+	Mat dst;
+	dst = instance->Threshold(newMat, dst, thresh, maxval, type);
+	saveMat(dest_path, dst);
+	return;
 }
 
- void  ImageDenoising(Mat src, Mat dst, int chose)
+void  ImageDenoising(string& src_path, string& dest_path, int flag)
 {
-	return instance->ImageDenoising(src, dst, chose);
+	auto newMat = getMat(src_path);
+	Mat dst;
+	dst = instance->ImageDenoising(newMat, dst, flag);
+	saveMat(dest_path, dst);
+	return;
 }
 
- void sharpen(const Mat& img, Mat& result)
+void sharpen(string& src_path, string& dest_path)
 {
-	return instance->sharpen(img, result);
+	auto newMat = getMat(src_path);
+	Mat dst;
+	dst = instance->sharpen(newMat, dst);
+	saveMat(dest_path, dst);
+	return;
 }
 
- void colorhistogram(IplImage * src)
+void colorhistogram(string& src_path)
 {
-	return instance->colorhistogram(src);
+	auto newImg = getImg(src_path);
+	return instance->colorhistogram(newImg);
 }
- void Canny(IplImage* pImg, IplImage* pCannyImg)
+
+void Canny(string& src_path, string& dest_path)
 {
-	return instance->Canny(pImg, pCannyImg);
+	auto newImg = getImg(src_path);
+	IplImage* dst = new IplImage;
+	dst = instance->Canny(newImg, dst);
+	saveImg(dest_path, dst);
+	return;
 }
+
+ 										                                                      
+
+/*
+ 
  void corners(IplImage *srcImage, IplImage *dstImage)
 {
 	return instance->corners(srcImage, dstImage);

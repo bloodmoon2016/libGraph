@@ -2,7 +2,7 @@
 #include <cstdlib>
  #include "impl.h"
 
-void ImageDLL::Threshold(Mat src, Mat dst, double thresh, double maxval, int type)
+Mat ImageDLL::Threshold(Mat src, Mat dst, double thresh, double maxval, int type)
 {
 	threshold(src,  dst, thresh,  maxval,  type);
 	//第一个参数，src，输入数组，填单通道, 8或32位浮点类型的Mat即可。
@@ -16,4 +16,5 @@ void ImageDLL::Threshold(Mat src, Mat dst, double thresh, double maxval, int typ
 	//2 : THRESH_TRUNC 当前点值大于阈值时，设置为阈值，否则不改变
 	//3 : THRESH_TOZERO 当前点值大于阈值时，不改变，否则设置为0
 	//4 : THRESH_TOZERO_INV  当前点值大于阈值时，设置为0，否则不改变
+	return dst;
 }

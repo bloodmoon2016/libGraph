@@ -3,8 +3,7 @@
 
 #define WIDTHBYTES(bits) (((bits) + 31) / 32 * 4)
 
-
-void ImageDLL::sharpen(const Mat& img, Mat& result)		  //拉普拉斯算子
+Mat ImageDLL::sharpen(const Mat& img, Mat& result)		  //拉普拉斯算子
 {
 	result.create(img.size(), img.type());
 	//处理边界内部的像素点, 图像最外围的像素点应该额外处理
@@ -31,6 +30,7 @@ void ImageDLL::sharpen(const Mat& img, Mat& result)		  //拉普拉斯算子
 	result.row(result.rows - 1).setTo(Scalar::all(0));
 	result.col(0).setTo(Scalar::all(0));
 	result.col(result.cols - 1).setTo(Scalar::all(0));
+	return result;
 }
 
 

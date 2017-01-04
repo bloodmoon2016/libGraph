@@ -72,10 +72,11 @@ void ImageDLL::colorhistogram(IplImage * src)                     //颜色直方图提
 	cvWaitKey(0);
 }
 
-void ImageDLL::Canny(IplImage* pImg, IplImage* pCannyImg)               //Canny算子对边缘提取
+IplImage* ImageDLL::Canny(IplImage* pImg, IplImage* pCannyImg)               //Canny算子对边缘提取
 {
 	//canny边缘检测
 	cvCanny(pImg, pCannyImg, 50, 150, 3);
+	return pCannyImg;
 }
 
 #define MAX_CORNERS 100

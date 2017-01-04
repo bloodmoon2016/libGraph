@@ -30,24 +30,24 @@ using namespace std;
 using namespace cv;
 #define PI 3.14
 
+static IplImage* TheImage;
 
 class ImageDLL{
 public:
 	ImageDLL();
 	~ImageDLL();
 	
-	IplImage* TheImage = cvCreateImage({256,256}, IPL_DEPTH_8U, 3);
 	void ResizeImage(IplImage* img);
-	void Gray(IplImage *ColorImage, int flag);//IplImage* GrayImage,
+	IplImage *Gray(IplImage *ColorImage, int flag);
 
-	 void Threshold(Mat src, Mat dst, double thresh, double maxval, int type);
+	 Mat Threshold(Mat src, Mat dst, double thresh, double maxval, int type);
 
-	 void  ImageDenoising(Mat src, Mat dst, int chose);
+	 Mat ImageDenoising(Mat src, Mat dst, int flag);
 
-	 void sharpen(const Mat& img, Mat& result);
+	 Mat sharpen(const Mat& img, Mat& result);
 
 	 void colorhistogram(IplImage * src);
-	 void Canny(IplImage* pImg, IplImage* pCannyImg);
+	 IplImage *Canny(IplImage* pImg, IplImage* pCannyImg);
 	 void corners(IplImage *srcImage, IplImage *dstImage);
 	 void Houghline(IplImage* src, IplImage* color_dst);
 	 void Houghcircle(IplImage* img, IplImage* dst);
