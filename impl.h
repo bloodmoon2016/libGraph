@@ -48,27 +48,21 @@ public:
 
 	 void colorhistogram(IplImage * src);
 	 IplImage *Canny(IplImage* pImg, IplImage* pCannyImg);
-	 void corners(IplImage *srcImage, IplImage *dstImage);
-	 void Houghline(IplImage* src, IplImage* color_dst);
-	 void Houghcircle(IplImage* img, IplImage* dst);
-	 CvSeq* Hougrectangular(IplImage* img, CvMemStorage* storage);
+	 IplImage *corners(IplImage *srcImage, IplImage *dstImage);
+	 IplImage *Houghline(IplImage* src, IplImage* color_dst);
+	 IplImage *Houghcircle(IplImage* img, IplImage* dst);
+	 //CvSeq* Hougrectangular(IplImage* img, CvMemStorage* storage);
 	 void Edgehistogram(IplImage *src);
-	 int vidstreamEdgedet(int argc, char ** argv);
-	 void Textureextraction(IplImage* img, IplImage* dst);
+	 //int vidstreamEdgedet(int argc, char ** argv);
+	 IplImage *Textureextraction(IplImage* img, IplImage* dst);
 
-	 int GetPTileThreshold(int *HistGram);
-	 int GetOSTUThreshold(int *HistGram);
-	 int Get1DMaxEntropyThreshold(int* HistGram);
-	 int GetMeanThreshold(int *HistGram);
-
-	 void LogEnhance(IplImage* img, IplImage* dst);
-	 void ExpEnhance(IplImage* img, IplImage* dst);
-	 void ExporeOver(IplImage* img, IplImage* dst);
-	 void OnEqialization(IplImage* img, IplImage* dst);
+	 IplImage *LogEnhance(IplImage* img, IplImage* dst);
+	 IplImage *ExpEnhance(IplImage* img, IplImage* dst);
+	 IplImage *ExporeOver(IplImage* img, IplImage* dst);
+	 IplImage *OnEqialization(IplImage* img, IplImage* dst);
 	 void HistogramSpecification(int* src, int* dst, int* histMap);
 	 void CDM(int M, int N, CvMat *mat);
-	 bool GrayLinearTransform(IplImage* src, IplImage* dst, uchar dstStart, uchar dstEnd);
-	 Mat HighPass(Mat img);
+	 IplImage *GrayLinearTransform(IplImage* src, IplImage* dst, uchar dstStart, uchar dstEnd);
 };
 
 #endif

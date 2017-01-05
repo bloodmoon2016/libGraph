@@ -2,7 +2,7 @@
  #include "impl.h"
 
 
-void ImageDLL::LogEnhance(IplImage* img, IplImage* dst)		 //对数图像增强算法
+IplImage *ImageDLL::LogEnhance(IplImage* img, IplImage* dst)		 //对数图像增强算法
 {
 	// 由于oldPixel:[1,256],则可以先保存一个查找表  
 	uchar lut[256] = { 0 };
@@ -28,9 +28,10 @@ void ImageDLL::LogEnhance(IplImage* img, IplImage* dst)		 //对数图像增强算法
 			}
 		}
 	}
+	return dst;
 }
 
-void ImageDLL::ExpEnhance(IplImage* img, IplImage* dst)	 //	 指数图像增强算法
+IplImage *ImageDLL::ExpEnhance(IplImage* img, IplImage* dst)	 //指数图像增强算法
 {
 	// 由于oldPixel:[1,256],则可以先保存一个查找表  
 	uchar lut[256] = { 0 };
@@ -56,9 +57,10 @@ void ImageDLL::ExpEnhance(IplImage* img, IplImage* dst)	 //	 指数图像增强算法
 			}
 		}
 	}
+	return dst;
 }
 
-void ImageDLL::ExporeOver(IplImage* img, IplImage* dst)	//	 曝光过度处理算法（图像反转）
+IplImage *ImageDLL::ExporeOver(IplImage* img, IplImage* dst)	// 曝光过度处理算法（图像反转）
 {
 	for (int row = 0; row < img->height; row++)
 	{
@@ -74,14 +76,16 @@ void ImageDLL::ExporeOver(IplImage* img, IplImage* dst)	//	 曝光过度处理算法（图
 			}
 		}
 	}
+	return dst;
 }
 
-void ImageDLL::OnEqialization(IplImage* img, IplImage* dst)		   //直方图均衡化算法
+IplImage *ImageDLL::OnEqialization(IplImage* img, IplImage* dst)		   //直方图均衡化算法
 {
 	IplImage *gray = 0;
 	cvCvtColor(img, gray, CV_BGR2GRAY);
 	cvEqualizeHist(gray, dst);
 	cvReleaseImage(&gray);
+	return dst;
 }
 
 void ImageDLL::HistogramSpecification(int* src, int* dst, int* histMap)		  //直方图规定化算法
@@ -234,7 +238,7 @@ void cvShiftDFT(CvArr * src_arr, CvArr * dst_arr)
 }
 
 //线性灰度增强 g(x,y)=[(d-c)/(b-a)]*(f(x,y)-a)+c
-bool ImageDLL::GrayLinearTransform(IplImage* src, IplImage* dst, uchar dstStart, uchar dstEnd)
+IplImage *ImageDLL::GrayLinearTransform(IplImage* src, IplImage* dst, uchar dstStart, uchar dstEnd)
 {
 	uchar* srcData = (uchar*)src->imageData;
 	//获取图像最大最小灰度(分情况可简化为255-0)
@@ -259,15 +263,6 @@ bool ImageDLL::GrayLinearTransform(IplImage* src, IplImage* dst, uchar dstStart,
 		int bb = linearRatio*(a - imageMin) + dstStart;
 		dst->imageData[x*step + y] = bb;
 	}
-	return true;
+	return dst;
 }
 
-Mat ImageDLL::HighPass(Mat img)				   //高反差保留算法 
-{
-	Mat temp;
-	GaussianBlur(img, temp, Size(7, 7), 1.6, 1.6);
-
-	int r = 3;
-	Mat diff = img + r*(img - temp); 
-	return diff;
-}

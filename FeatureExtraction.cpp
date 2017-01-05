@@ -81,7 +81,7 @@ IplImage* ImageDLL::Canny(IplImage* pImg, IplImage* pCannyImg)               //C
 
 #define MAX_CORNERS 100
 
-void ImageDLL::corners(IplImage *srcImage, IplImage *dstImage)             //Ω«µ„Ã·»°
+IplImage *ImageDLL::corners(IplImage *srcImage, IplImage *dstImage)             //Ω«µ„Ã·»°
 {
 	int cornersCount = MAX_CORNERS;//µ√µΩµƒΩ«µ„ ˝ƒø
 	CvPoint2D32f corners[MAX_CORNERS];// ‰≥ˆΩ«µ„ºØ∫œ
@@ -113,13 +113,14 @@ void ImageDLL::corners(IplImage *srcImage, IplImage *dstImage)             //Ω«µ
 		}
 	}
 	dstImage = srcImage;
+	return dstImage;
 
 	cvReleaseImage(&grayImage);
 	cvReleaseImage(&corners1);
 	cvReleaseImage(&corners2);
 }
 
-void ImageDLL::Houghline(IplImage* src, IplImage* color_dst)            //Hough÷±œﬂÃ·»°
+IplImage *ImageDLL::Houghline(IplImage* src, IplImage* color_dst)            //Hough÷±œﬂÃ·»°
 {
 	IplImage* dst;
 	CvMemStorage* storage = cvCreateMemStorage(0);
@@ -138,10 +139,11 @@ void ImageDLL::Houghline(IplImage* src, IplImage* color_dst)            //Hough÷
 		CvPoint* line = (CvPoint*)cvGetSeqElem(lines, i);
 		cvLine(color_dst, line[0], line[1], CV_RGB(255, 0, 0), 3, CV_AA, 0);
 	}
+	return color_dst;
 }
 
 
-void  ImageDLL::Houghcircle(IplImage* img, IplImage* dst)      //Hough‘≤Ã·»°
+IplImage *ImageDLL::Houghcircle(IplImage* img, IplImage* dst)      //Hough‘≤Ã·»°
 {
 	IplImage* gray = cvCreateImage(cvGetSize(img), 8, 1);
 	CvMemStorage* storage = cvCreateMemStorage(0);
@@ -160,16 +162,16 @@ void  ImageDLL::Houghcircle(IplImage* img, IplImage* dst)      //Hough‘≤Ã·»°
 	}
 	//cout << "‘≤ ˝¡ø=" << circles->total << endl;
 	dst = img;
+	return dst;
 }
-
-
+/*
 int thresh = 50;
 IplImage* img = 0;
 IplImage* img0 = 0;
 CvMemStorage* storage = 0;
 CvPoint pt[4]; const char* wndname = "Square Detection Demo";
 
-double angle(CvPoint* pt1, CvPoint* pt2, CvPoint* pt0)             //Houghæÿ–ŒÃ·»°
+double angle(CvPoint* pt1, CvPoint* pt2, CvPoint* pt0)             
 {
 	double dx1 = pt1->x - pt0->x;
 	double dy1 = pt1->y - pt0->y;
@@ -177,7 +179,8 @@ double angle(CvPoint* pt1, CvPoint* pt2, CvPoint* pt0)             //Houghæÿ–ŒÃ·
 	double dy2 = pt2->y - pt0->y;
 	return (dx1*dx2 + dy1*dy2) / sqrt((dx1*dx1 + dy1*dy1)*(dx2*dx2 + dy2*dy2) + 1e-10);
 }
-CvSeq* ImageDLL::Hougrectangular(IplImage* img, CvMemStorage* storage)
+
+CvSeq* ImageDLL::Hougrectangular(IplImage* img, CvMemStorage* storage)      //Houghæÿ–ŒÃ·»°
 {
 	CvSeq* contours;
 	int i, c, l, N = 11;
@@ -240,7 +243,7 @@ CvSeq* ImageDLL::Hougrectangular(IplImage* img, CvMemStorage* storage)
 	cvReleaseImage(&timg);
 	return squares;
 }
-
+*/
 void ImageDLL::Edgehistogram(IplImage *src)                      //±ﬂ‘µ÷±∑ΩÕºÃ·»°
 {
 	CvHistogram *hist = 0; // define multi_demention histogram
@@ -331,7 +334,7 @@ void ImageDLL::Edgehistogram(IplImage *src)                      //±ﬂ‘µ÷±∑ΩÕºÃ·»
 	cvReleaseHist(&hist);
 }
 
-
+/*
 int ImageDLL::vidstreamEdgedet(int argc, char ** argv)                //  ”∆µ¡˜÷–±ﬂ‘µºÏ≤‚
 {
 	IplImage * laplace = 0;
@@ -341,10 +344,10 @@ int ImageDLL::vidstreamEdgedet(int argc, char ** argv)                //  ”∆µ¡˜÷
 	CvCapture *capture = 0;
 
 	//¥”…„œÒÕ∑∂¡»°
-	/*if(argc == 1 ||( argc==2 && strlen(argv[1])==1 && isdigit(argv[1][0]) ))
-	capture = cvCaptureFromCAM(argc == 2 ? argv[1][0] -'0':0);*/
+	//if(argc == 1 ||( argc==2 && strlen(argv[1])==1 && isdigit(argv[1][0]) ))
+	//capture = cvCaptureFromCAM(argc == 2 ? argv[1][0] -'0':0);
 	//¥”Œƒº˛÷–∂¡»°
-	/* else if(argc == 2)*/
+	// else if(argc == 2)
 	capture = cvCaptureFromAVI("1.avi");
 	if (!capture)
 	{
@@ -394,9 +397,9 @@ int ImageDLL::vidstreamEdgedet(int argc, char ** argv)                //  ”∆µ¡˜÷
 	cvDestroyWindow("video");
 	return 0;
 }
+*/
 
-
-void ImageDLL::Textureextraction(IplImage* img, IplImage* dst)     //Œ∆¿ÌÃ·»°
+IplImage *ImageDLL::Textureextraction(IplImage* img, IplImage* dst)     //Œ∆¿ÌÃ·»°
 {
 	int tmp[8] = { 0 };
 	int sum = 0; int k = 0;
@@ -433,4 +436,5 @@ void ImageDLL::Textureextraction(IplImage* img, IplImage* dst)     //Œ∆¿ÌÃ·»°
 		else s.val[0] = 59;
 		cvSet2D(dst, i, j, s);
 	}
+	return dst;
 }

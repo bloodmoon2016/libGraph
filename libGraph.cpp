@@ -82,86 +82,91 @@ void Canny(string& src_path, string& dest_path)
 	return;
 }
 
- 										                                                      
+void corners(string& src_path, string& dest_path)
+{
+	auto newImg = getImg(src_path);
+	IplImage* dst = new IplImage;
+	dst = instance->corners(newImg, dst);
+	saveImg(dest_path, dst);
+	return;
+} 										                                                      
 
-/*
+void Houghline(string& src_path, string& dest_path)
+{
+	auto newImg = getImg(src_path);
+	IplImage* dst = new IplImage;
+	dst = instance->Houghline(newImg, dst);
+	saveImg(dest_path, dst);
+	return;
+}
  
- void corners(IplImage *srcImage, IplImage *dstImage)
+void Houghcircle(string& src_path, string& dest_path)
 {
-	return instance->corners(srcImage, dstImage);
-}
- void Houghline(IplImage* src, IplImage* color_dst)
-{
-	return instance->Houghline(src, color_dst);
-}
- void Houghcircle(IplImage* img, IplImage* dst)
-{
-	return instance->Houghcircle(img, dst);
-}
- CvSeq* Hougrectangular(IplImage* img, CvMemStorage* storage)
-{
-	return instance->Hougrectangular(img,  storage);
-}
- void Edgehistogram(IplImage *src)
-{
-	return instance->Edgehistogram(src);
-}
- int vidstreamEdgedet(int argc, char ** argv)
-{
-	return instance->vidstreamEdgedet(argc, argv);
-}
- void Textureextraction(IplImage* img, IplImage* dst)
-{
-	return instance->Textureextraction(img, dst);
+	auto newImg = getImg(src_path);
+	IplImage* dst = new IplImage;
+	dst = instance->Houghcircle(newImg, dst);
+	saveImg(dest_path, dst);
+	return;
 }
 
- int GetPTileThreshold(int *HistGram)
+void Edgehistogram(string& src_path)
 {
-	return instance->GetPTileThreshold(HistGram);
-}
- int GetOSTUThreshold(int *HistGram)
-{
-	return instance->GetOSTUThreshold(HistGram);
-}
- int Get1DMaxEntropyThreshold(int* HistGram)
-{
-	return instance->Get1DMaxEntropyThreshold(HistGram);
-}
- int GetMeanThreshold(int *HistGram)
-{
-	return instance->GetMeanThreshold(HistGram);
+	auto newImg = getImg(src_path);
+	IplImage* dst = new IplImage;
+	return instance->Edgehistogram(newImg);
 }
 
- void LogEnhance(IplImage* img, IplImage* dst)
+void Textureextraction(string& src_path, string& dest_path)
 {
-	return instance->LogEnhance( img, dst);
+	 auto newImg = getImg(src_path);
+	 IplImage* dst = new IplImage;
+	 dst =instance->Textureextraction(newImg, dst);
+	 saveImg(dest_path, dst);
+	 return;
 }
- void ExpEnhance(IplImage* img, IplImage* dst)
+
+void LogEnhance(string& src_path, string& dest_path)
 {
-	return instance->ExpEnhance(img,dst);
+	 auto newImg = getImg(src_path);
+	 IplImage* dst = new IplImage;
+	 dst =  instance->LogEnhance(newImg, dst);
+	 saveImg(dest_path, dst);
+	return;
 }
- void ExporeOver(IplImage* img, IplImage* dst)
+
+void ExpEnhance(string& src_path, string& dest_path)
 {
-	return instance->ExporeOver(img, dst);
+	auto newImg = getImg(src_path);
+	IplImage* dst = new IplImage;
+	dst = instance->ExpEnhance(newImg, dst);
+	saveImg(dest_path, dst);
+	return;
 }
- void OnEqialization(IplImage* img, IplImage* dst)
+
+void ExporeOver(string& src_path, string& dest_path)
 {
-	return instance->OnEqialization(img, dst);
+	auto newImg = getImg(src_path);
+	IplImage* dst = new IplImage;
+	dst = instance->ExporeOver(newImg, dst);
+	saveImg(dest_path, dst);
+	return;
 }
- void HistogramSpecification(int* src, int* dst, int* histMap)
+
+void OnEqialization(string& src_path, string& dest_path)
 {
-	return instance->HistogramSpecification(src,  dst, histMap);
+	auto newImg = getImg(src_path);
+	IplImage* dst = new IplImage;
+	dst = instance->OnEqialization(newImg, dst);
+	saveImg(dest_path, dst);
+	return;
 }
- void CDM(int M, int N, CvMat *mat)
+
+void GrayLinearTransform(string& src_path, string& dest_path, uchar dstStart, uchar dstEnd)
 {
-	return instance->CDM(M,  N,  *mat);
+	 auto newImg = getImg(src_path);
+	 IplImage* dst = new IplImage;
+	 dst = instance->GrayLinearTransform(newImg, dst, dstStart, dstEnd);
+	 saveImg(dest_path, dst);
+	 return;
 }
- bool GrayLinearTransform(IplImage* src, IplImage* dst, uchar dstStart, uchar dstEnd)
-{
-	return instance->GrayLinearTransform(src,dst, dstStart, dstEnd);
-}
- Mat HighPass(Mat img)
-{
-	return instance->HighPass(img);
-}
-*/
+

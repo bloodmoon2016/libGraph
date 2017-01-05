@@ -17,27 +17,26 @@ extern "C" {
 	__declspec(dllexport) void colorhistogram(string& src_path );	//颜色直方图提取
 
 	__declspec(dllexport) void Canny(string& src_path, string& dest_path );		//Canny算子对边缘提取
-	__declspec(dllexport) void corners(string& src_path,string& dest_path);
-	__declspec(dllexport) void Houghline(string& src_path, string& dest_path);
-	__declspec(dllexport) void Houghcircle(string& src_path, string& dest_path);
-	__declspec(dllexport) void Hougrectangular(string& src_path, string& dest_path);
-	__declspec(dllexport) void Edgehistogram(string& src_path, string& dest_path);
-	__declspec(dllexport) void vidstreamEdgedet(string& src_path, string& dest_path);
-	__declspec(dllexport) void Textureextraction(string& src_path, string& dest_path);
 
-	__declspec(dllexport) void GetPTileThreshold(int *HistGram);
-	__declspec(dllexport) void GetOSTUThreshold(int *HistGram);
-	__declspec(dllexport) void Get1DMaxEntropyThreshold(int* HistGram);
-	__declspec(dllexport) void GetMeanThreshold(int *HistGram);
+	__declspec(dllexport) void corners(string& src_path,string& dest_path);        //角点提取
 
-	__declspec(dllexport) void LogEnhance(string& src_path, string& dest_path);
-	__declspec(dllexport) void ExpEnhance(string& src_path, string& dest_path);
-	__declspec(dllexport) void ExporeOver(string& src_path, string& dest_path);
-	__declspec(dllexport) void OnEqialization(string& src_path, string& dest_path);
-	__declspec(dllexport) void HistogramSpecification(int* src, int* dst, int* histMap);
-	__declspec(dllexport) void CDM(int M, int N, CvMat *mat);
-	__declspec(dllexport) void GrayLinearTransform(string& src_path, string& dest_path, uchar dstStart, uchar dstEnd);
-	__declspec(dllexport) void HighPass(string& src_path, string& dest_path);
+	__declspec(dllexport) void Houghline(string& src_path, string& dest_path);     //Hough直线提取
+
+	__declspec(dllexport) void Houghcircle(string& src_path, string& dest_path);   //Hough圆提取
+
+	__declspec(dllexport) void Edgehistogram(string& src_path, string& dest_path);   //边缘直方图提取
+
+	__declspec(dllexport) void Textureextraction(string& src_path, string& dest_path);  //纹理提取
+
+	__declspec(dllexport) void LogEnhance(string& src_path, string& dest_path);     //对数图像增强算法
+
+	__declspec(dllexport) void ExpEnhance(string& src_path, string& dest_path);     //指数图像增强算法
+
+	__declspec(dllexport) void ExporeOver(string& src_path, string& dest_path);     // 曝光过度处理算法（图像反转）
+
+	__declspec(dllexport) void OnEqialization(string& src_path, string& dest_path);   //直方图均衡化算法
+
+	__declspec(dllexport) void GrayLinearTransform(string& src_path, string& dest_path, uchar dstStart, uchar dstEnd);//线性灰度增强,dstStart灰度范围扩展或压缩下限，dstEnd灰度范围扩展或压缩上限
 }
 
 #endif
